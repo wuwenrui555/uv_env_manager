@@ -1,0 +1,19 @@
+[project]
+name = "mesmer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "deepcell==0.12.6",
+    "geopandas>=1.0.1",
+    "imagecodecs>=2024.12.30",
+    "ipykernel>=6.29.5",
+    "pycodex",
+    "pyqupath",
+    "tqdm-joblib>=0.0.4",
+]
+
+[tool.uv.sources]
+pycodex = { git = "https://github.com/SizunJiangLab/pycodex.git", rev = "v0.1.9" }
+pyqupath = { git = "https://github.com/wuwenrui555/pyqupath.git", rev = "v0.0.4" }
