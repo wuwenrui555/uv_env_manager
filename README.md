@@ -16,10 +16,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv_env/                   # Root directory for all environments
 ├── uv_mesmer/            # Project-specific directory
 │   ├── .venv/            # Virtual environment directory
-│   │   ├── bin/          # Executable scripts and Python interpreter
-│   │   ├── lib/          # Libraries and installed packages
-│   │   ├── include/      # C header files for extensions
-│   │   └── pyvenv.cfg    # Virtual environment configuration
 │   ├── pyproject.toml    # Project definition and dependencies
 │   └── uv.lock           # Lock file with exact package versions
 ```
@@ -55,9 +51,10 @@ Create symbolic links to an existing environment (you cannot modify the environm
 
 ```bash
 cd /path/to/your/project
-ln -s /mnt/nfs/storage/uv_env/uv_mesmer/.venv .
-ln -s /mnt/nfs/storage/uv_env/uv_mesmer/pyproject.toml .
-ln -s /mnt/nfs/storage/uv_env/uv_mesmer/uv.lock .
+venv_name=uv_mesmer
+ln -s /mnt/nfs/storage/uv_env/${venv_name}/.venv .
+ln -s /mnt/nfs/storage/uv_env/${venv_name}/pyproject.toml .
+ln -s /mnt/nfs/storage/uv_env/${venv_name}/uv.lock .
 
 # Run your script using the linked environment
 uv run python your_script.py
@@ -69,9 +66,10 @@ Copy an existing environment to your local project (you can modify the environme
 
 ```bash
 cd /path/to/your/project
-cp -r /mnt/nfs/storage/uv_env/uv_mesmer/.venv .
-cp /mnt/nfs/storage/uv_env/uv_mesmer/pyproject.toml .
-cp /mnt/nfs/storage/uv_env/uv_mesmer/uv.lock .
+venv_name=uv_mesmer
+cp -r /mnt/nfs/storage/uv_env/${venv_name}/.venv .
+cp /mnt/nfs/storage/uv_env/${venv_name}/pyproject.toml .
+cp /mnt/nfs/storage/uv_env/${venv_name}/uv.lock .
 
 # Run your script using the copied environment
 uv run python your_script.py
@@ -84,7 +82,8 @@ Run scripts using an environment from its original location without copying or l
 ```bash
 # Use the --no-project flag to ignore local project settings
 # Use -p to specify the path to the virtual environment
-uv run --no-project -p /mnt/nfs/storage/uv_env/uv_mesmer/.venv/ python your_script.py
+venv_path=/mnt/nfs/storage/uv_env/uv_mesmer/.venv
+uv run --no-project -p ${venv_path} python your_script.py
 ```
 
 ## Advanced Usage
