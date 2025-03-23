@@ -1,0 +1,10 @@
+[project]
+name = "uv-scanpy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=6.29.5",
+    "scanpy>=1.11.0",
+]
