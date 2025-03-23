@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["pyproject", "venv"]
+  "cSpell.words": [
+    "cpython",
+    "ipykernel",
+    "matplotlib",
+    "numpy",
+    "pyproject",
+    "seaborn",
+    "venv"
+  ]
 }
