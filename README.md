@@ -7,8 +7,21 @@
 Install `uv` with a single command:
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -LsSf https://astral.sh/uv/0.6.9/install.sh | sh
 ```
+
+### Setting Up Shared Environments
+
+To create and manage environments that all users can access, **the OWNER of the environment** should set these environment variables in their `.bashrc` or `.bash_profile`:
+
+```bash
+# Define the shared root directory
+uv_root="/mnt/nfs/storage/uv_env_manager"
+export UV_PYTHON_INSTALL_DIR="${uv_root}/.local/share/uv/python"
+export UV_TOOL_DIR="${uv_root}/.local/share/uv/tools" 
+```
+
+After setting these variables, all Python interpreters and tools will be installed to the shared location, making them available to all users with access to the shared directory.
 
 ## Environment Structure
 
@@ -71,15 +84,21 @@ Copy an existing environment for local modifications:
 ```bash
 cd /path/to/your/project
 
-# Copy the environment
+# Copy the environment files (not the .venv directory)
 venv_root=/mnt/nfs/storage/uv_env_manager/uv_env
 venv_name=uv_mesmer
 cp ${venv_root}/${venv_name}/.python-version .
 cp ${venv_root}/${venv_name}/pyproject.toml .
 cp ${venv_root}/${venv_name}/uv.lock .
 
-# Sync the environment
+# Create local environment based on the files
 uv sync
+
+# Add packages to the environment
+uv add <package_name>
+
+# Remove packages from the environment
+uv remove <package_name>
 
 # Run your script
 uv run python your_script.py
