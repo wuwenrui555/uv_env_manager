@@ -51,9 +51,12 @@ Create symbolic links to an existing environment:
 
 ```bash
 cd /path/to/your/project
+
+# Create symbolic links to the environment
 venv_root=/mnt/nfs/storage/uv_env_manager/uv_env
 venv_name=uv_mesmer
 ln -s ${venv_root}/${venv_name}/.venv .
+ln -s ${venv_root}/${venv_name}/.python-version .
 ln -s ${venv_root}/${venv_name}/pyproject.toml .
 ln -s ${venv_root}/${venv_name}/uv.lock .
 
@@ -67,11 +70,16 @@ Copy an existing environment for local modifications:
 
 ```bash
 cd /path/to/your/project
+
+# Copy the environment
 venv_root=/mnt/nfs/storage/uv_env_manager/uv_env
 venv_name=uv_mesmer
-cp -r ${venv_root}/${venv_name}/.venv .
+cp ${venv_root}/${venv_name}/.python-version .
 cp ${venv_root}/${venv_name}/pyproject.toml .
 cp ${venv_root}/${venv_name}/uv.lock .
+
+# Sync the environment
+uv sync
 
 # Run your script
 uv run python your_script.py
